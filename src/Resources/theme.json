@@ -2,9 +2,9 @@
   "name": "BuyButtonColorChange",
   "author": "Shopware AG",
   "views": [
-     "@Storefront",
-     "@Plugins",
-     "@BuyButtonColorChange"
+    "@Storefront",
+    "@Plugins",
+    "@BuyButtonColorChange"
   ],
   "style": [
     "app/storefront/src/scss/overrides.scss",
@@ -18,5 +18,37 @@
   "asset": [
     "@Storefront",
     "app/storefront/src/assets"
-  ]
+  ],
+  "config": {
+    "blocks": {
+      "BuyButtonSettings": {
+        "label":{
+          "en-GB": "Button Settings",
+          "de-DE": "Button-Einstellungen"
+        }
+      }
+    },
+    "fields": {
+      "buttonColor": {
+        "label": {
+          "en-GB": "Button Color",
+          "de-DE": "Button-Farbe"
+        },
+        "type": "color",
+        "value": "#ff0000",
+        "editable": true,
+        "block": "buttonSettings"
+      },
+      "buttonText": {
+        "label": {
+          "en-GB": "Button Text",
+          "de-DE": "Button-Text"
+        },
+        "type": "text",
+        "value": "Wird in den Warenkorb gelegt",
+        "editable": true,
+        "block": "buttonSettings"
+      }
+    }
+  }
 }
