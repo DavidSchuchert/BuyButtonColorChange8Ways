@@ -1,0 +1,9 @@
+{
+    "BuyButtonSnippets": {
+        "Button": {
+            "Text": {
+                "BuyConfirmationText": "Wird in den Warenkorb gelegt"
+            }
+        }
+    }
+}

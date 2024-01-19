@@ -1,0 +1,9 @@
+{
+    "BuyButtonSnippets": {
+        "Button": {
+            "Text": {
+                "BuyConfirmationText": "Being added to the basket"
+            }
+        }
+    }
+}

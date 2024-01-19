@@ -2,6 +2,7 @@
 
 {% block page_product_detail_buy_button %}
   {# @deprecated tag:v6.5.0 - Bootstrap v5 removes `btn-block` class, use `d-grid` wrapper instead #}
+   <div id="buy-button-container" data-buy-confirmation-text="{{ 'BuyButtonSnippets.Button.Text.BuyConfirmationText'|trans }}">
                                 {% if feature('v6.5.0.0') %}
                                     <div class="d-grid">
                                         <button class="btn btn-primary btn-buy"
@@ -17,4 +18,5 @@
                                         {{ "detail.addProduct"|trans|sw_sanitize }}
                                     </button>
                                 {% endif %}
+                                </div>
 {% endblock %}

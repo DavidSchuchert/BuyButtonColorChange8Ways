@@ -38,16 +38,6 @@
         "value": "#ff0000",
         "editable": true,
         "block": "buttonSettings"
-      },
-      "buttonText": {
-        "label": {
-          "en-GB": "Button Text",
-          "de-DE": "Button-Text"
-        },
-        "type": "text",
-        "value": "Wird in den Warenkorb gelegt",
-        "editable": true,
-        "block": "buttonSettings"
       }
     }
   }
