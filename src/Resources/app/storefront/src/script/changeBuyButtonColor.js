@@ -1,45 +1,80 @@
 import Plugin from 'src/plugin-system/plugin.class'
+import DomAccess from 'src/helper/dom-access.helper'
 
-export default class BuyButtonColorChanger extends Plugin{
+export default class BuyButtonColorChanger extends Plugin {
 
-    init(){
+    init() {
         console.info("Plugin BuyButtonColorChanger loaded!")
 
         this.createElement()
+        this.addEventListeners()
     }
 
-    createElement(){
+
+    createElement() {
         console.info("Plugin BuyButtonColorChanger Created!")
+        this._button = DomAccess.querySelector(document, '.btn-buy');
+    }
+
+    addEventListeners() {
+        document.addEventListener('click', this.onClick.bind(this))
+    }
+
+    onClick() {
+        console.info('click');
+        this._button.classList.add("btn-cart-loading");
+        this._button.textContent = "test";
+
+        let tempButton = this._button; // Save the button reference
+
+        setTimeout(() => {
+            this._button.classList.remove("btn-cart-loading");
+            this._button.textContent = "originalText";
+
+            // Remove the temporary button reference
+            this._button = null;
+        }, 1000);
+    }
+}
+/*         document.addEventListener("DOMContentLoaded", function () {
+            this._button = DomAccess.querySelector(document, '.btn-buy');
+            console.info('click');
+            this._button.addEventListener("click", function () {
+                this._button.classList.add("btn-cart-loading");
+            });
+        }); */
+
+
+
+        /* 
+               document.addEventListener("DOMContentLoaded", function () {
+            this.buttons = document.querySelectorAll("button.btn-buy");
+            this.buyButtonContainer = document.getElementById("buy-button-container");
+            this.buyConfirmationText = buyButtonContainer.getAttribute('data-buy-confirmation-text');
         
-        document.addEventListener("DOMContentLoaded", function () {
-            // Select all button elements with the class 'btn-buy' and store them in 'buttons'.
-            let buttons = document.querySelectorAll("button.btn-buy");
         
-            // Find the element with the ID 'buy-button-container' and store it in 'buyButtonContainer'.
-            let buyButtonContainer = document.getElementById("buy-button-container");
         
-            // Get the 'data-buy-confirmation-text' attribute from 'buyButtonContainer' to use later.
-            let buyConfirmationText = buyButtonContainer.getAttribute('data-buy-confirmation-text');
         
-            // Iterate over each button stored in 'buttons'.
+        
+            
             buttons.forEach(function (button) {
-                // Add a click event listener to each button.
                 button.addEventListener("click", function () {
-                    // Save the current text of the button for later use.
                     let originalText = button.textContent;
         
-                    // Add a class to the button to show a loading state and change its text to the confirmation message.
-                    button.classList.add("btn-cart-loading"); 
-                    button.textContent = buyConfirmationText;
+                    this._button.classList.add('btn-cart-loading').then(() => {
+                        button.textContent = buyConfirmationText;
+                    });
         
-                    // After 1 second, reset the button to its original state by removing the loading class and restoring the original text.
                     setTimeout(function () {
                         button.classList.remove("btn-cart-loading");
                         button.textContent = originalText;
                     }, 1000);
                 });
             });
-        });
-        
-    }
-}
+        });  */
+
+
+
+        /* this._button = DomAccess.querySelector(document, '.btn-buy')
+        this._button.classList.add('btn-cart-loading') */
+    
