@@ -1,3 +1,8 @@
+import BuyButtonColorChanger from'./script/changeBuyButtonColor'
+
+window.PluginManager.register('BuyButtonColorChanger', BuyButtonColorChanger, '.buy-widget-container')
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Select all button elements with the class 'btn-buy' and store them in 'buttons'.
