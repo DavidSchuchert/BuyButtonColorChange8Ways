@@ -2,41 +2,47 @@ import Plugin from 'src/plugin-system/plugin.class'
 import DomAccess from 'src/helper/dom-access.helper'
 
 export default class BuyButtonColorChanger extends Plugin {
-  init() {
-    console.info('Plugin BuyButtonColorChanger loaded!');
+    //start the initialisition process
+    init() {
+        this.createElement();
+        this.addEventListeners();
+    }
+    
+    //select the button and set his text as variable
+    createElement() {
+        this._button = DomAccess.querySelector(document, '.btn-buy');
+        this.originalButtonText = this._button.textContent; // Store the button text before clearing it
 
-    this.createElement();
-    this.addEventListeners();
-  }
+    }
 
-  createElement() {
-    console.info('Plugin BuyButtonColorChanger created!');
-    this._button = DomAccess.querySelector(document, '.btn-buy');
-    this.originalButtonText = this._button.textContent; // Store the button text before clearing it
+    //start the eventlistener
+    addEventListeners() {
+        this._button.addEventListener('click', this.onClick.bind(this));
+    }
 
-  }
+    //define what happens after the click
+    onClick() {
+        let buyButtonContainer = document.getElementById('buy-button-container');
+        this.buyConfirmationText = buyButtonContainer.getAttribute('data-buy-confirmation-text');
 
-  addEventListeners() {
-    this._button.addEventListener('click', this.onClick.bind(this));
-  }
+        this.changeButtonAppearance();
 
-  onClick() {
+        setTimeout(() => {
+            this.resetButton();
 
+        }, 1000);
+    }
 
-    let buyButtonContainer = document.getElementById('buy-button-container');
-    let buyConfirmationText = buyButtonContainer.getAttribute('data-buy-confirmation-text');
+    //Change the color and text of the button
+    changeButtonAppearance() {
+        this._button.classList.add('btn-cart-loading');
+        this._button.textContent = this.buyConfirmationText;
 
-    this._button.classList.add('btn-cart-loading'); // Add the loading class
-    this._button.textContent = buyConfirmationText; // Set the button text to the confirmation text
+    }
+    // Restore the button text and remove the loading class
+    resetButton() {
+        this._button.classList.remove('btn-cart-loading');
+        this._button.textContent = this.originalButtonText;
 
-    // Store the button reference as a property of the `this` object
-    this.buttonRef = this._button;
-
-    setTimeout(() => {
-      // Restore the button text and remove the loading class
-      this.buttonRef.classList.remove('btn-cart-loading');
-      this.buttonRef.textContent = this.originalButtonText;
-
-    }, 1000);
-  }
+    }
 }
